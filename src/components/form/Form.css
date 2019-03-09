@@ -1,0 +1,22 @@
+.form-container{
+    height: 80vh;
+    width: 80vw;
+    /* background-color: aqua */
+}
+
+.conversation-input-area{
+    border-radius: 40px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    min-height: 18px;
+    font-size: 14px;
+    padding: 19px 60px 19px 30px;
+    height: 56px;
+    color: rgba(34,34,34,0.4);
+    font-weight: 900;
+    height: 18px;
+    width: 90%;
+    box-shadow: 0 0 1px rgba(58,58,58,0.5);
+}

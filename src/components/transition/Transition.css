@@ -1,0 +1,24 @@
+.transition-container{
+    position: relative;
+    width: 80%;
+    height: 25%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+.transition-logo{
+    position: absolute;
+}
+
+.transition-details{
+    position: relative;
+}
+
+.transition-title{
+    position: relative;
+}
+
+.transition-progress{
+    position: relative;
+}
