@@ -1,43 +1,90 @@
 .dashboard-container{
-    height: 93vh;
+    height: 100vh;
+    margin:auto;
     position: relative;
-    background-color: #f1f1f1;
+    background-color: #e4e6e6;
 }
 .conversation-container{
-    position: absolute;
-    top: 20%;
-    left: 40%;
+    /* position: absolute;
+    top: 28%;
+    left: 30%; */
+    position: relative;
+    width: 606px;
+    margin: auto;
+    top: 24%;
 }
 .conversation-input{
+    clear: both;
     border-top: 0;
     border-right: 0;
     border-left: 0;
-    background-color: #f1f1f1;
-    border-bottom: 2px solid #c2c6cc;
+    /* margin-top: 10px; */
+    background-color: #f1f1f1;    
     color: #1d6ae5;
-    font-size: 3.2rem;
-    text-align: center;
-    padding: 0;
+    font-size: 1rem;
+    text-align: left;
+    padding: 8px 8px 8px 22px;
     text-transform: lowercase;    
-    width: 22rem;
-}
+    width: 36rem;
+
+} 
 
 
-.conversation-button{
-    background-color: #1555ba;
+ .conversation-button{   
+     float: left;  
+    background-color: #009EB0;
     color:white;
-    margin: 2.4rem auto;
+    margin: 2rem 1rem 1rem 1rem;    
     display: block;
-    font-size: 1.6rem;
-    line-height: 2rem;
-    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1rem;
+    font-weight: 400;
     color: #fff;
-    font-family: inherit;
-    text-align: center;
-    background-color: #1d6ae5;
+    font-family: 'Lato';
+    text-align: center;    
     border: 0;
     border-radius: 0;
     cursor: pointer;
-    padding: 1.4rem 3.2rem;    
-    width: auto;
+    padding: 1rem 1rem 1rem 1rem;        
+    width: 200px;
+}
+
+
+.welcome-title{
+    font-size: 22px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.ip-container{
+    position: relative;
+    margin-top: 24px
+}
+
+.ip-separator{
+    position: absolute;
+    top:8px;
+    right:10%;
+    color: rgb(84, 87, 87);
+}
+.btn-container{
+    margin-left: 12%;
+}
+
+.recent-form-container{
+    position: absolute;
+    width: 606px;
+    height: 20vh;
+    /* background-color: #009EB0; */
+    top: 368%;
+    /* left:30%; */
+    border-top:1px solid rgba(121, 121, 121, 0.51);
+    
+}
+
+.recent-title{
+    width: 100%;
+    text-align: center;
+    margin-top:6px;
+    font-size: 12px;
 }

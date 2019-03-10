@@ -27,13 +27,19 @@ class Transition extends Component {
   render() {    
     return (
      <div className="transition-container" >
+
         <div className="transition-logo">
 
         </div>       
         <div className="transition-details">
-            <div className="transition-title"></div>    
+            <div className="transition-title">Please wait while we get your form ready...</div>    
             <div className="transition-progress">
-                <LinearProgress variant="determinate" value={this.state.completed} />
+                <LinearProgress  variant="determinate" value={this.state.completed} 
+                 styles={{
+                  bar: {
+                    backgroundColor: 'purple',
+                  },
+               }}/>
             </div>            
         </div>       
             

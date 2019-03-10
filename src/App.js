@@ -36,7 +36,8 @@ class App extends Component {
 
   displayView(){
     if(this.state.view==='Dashboard'){
-      return <Dashboard view={this.onNavigateToTransition.bind(this)} />
+     return <Dashboard view={this.onNavigateToTransition.bind(this)} />
+     //return <Form/>
     }
     else if (this.state.view==='Form'){
       return <Form/>
@@ -48,15 +49,7 @@ class App extends Component {
 
   render() {
     return (      
-        <div>
-          <AppBar position="static">
-            <Toolbar className='toolbar'>
-              <IconButton  color="inherit" aria-label="Menu">
-                <MenuIcon />
-              </IconButton>
-              <AccountCircle />
-            </Toolbar>
-          </AppBar>
+        <div>         
           <div className="view-container">
             {this.displayView()}
           </div>

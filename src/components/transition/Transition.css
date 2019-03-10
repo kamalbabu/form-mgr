@@ -1,9 +1,8 @@
 .transition-container{
+    height: 100vh;
+    margin:auto;
     position: relative;
-    width: 80%;
-    height: 25%;
-    margin-left: 10%;
-    margin-right: 10%;
+    background-color: #e4e6e6;
 }
 
 
@@ -13,10 +12,16 @@
 
 .transition-details{
     position: relative;
+    width: 606px;
+    margin: auto;
+    top: 24%;
 }
 
 .transition-title{
     position: relative;
+    font-size: 22px;
+    font-weight: 100;
+    text-align: center;
 }
 
 .transition-progress{
