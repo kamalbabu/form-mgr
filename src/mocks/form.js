@@ -7,7 +7,7 @@ let formData = {
             options:{}
         },
         {
-            entity:'DateofBirth',
+            entity:'Date of Birth',
             question:'Please provide date of birth',
             options:{}
         },
@@ -28,7 +28,7 @@ let formData = {
             options:{}
         },
         {
-            entity:'ContactPhone',
+            entity:'Contact Phone',
             question:'We would need your contact number',
             options:{}
         }]

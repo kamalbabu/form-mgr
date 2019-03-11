@@ -17,7 +17,6 @@ class App extends Component {
   }
   
   onNavigateToTransition(option){
-    console.log(option)
     this.setState({
       view:'Transition',
       option:option
@@ -33,8 +32,8 @@ class App extends Component {
 
   displayView(){
     if(this.state.view==='Dashboard'){
-     return <Dashboard view={this.onNavigateToTransition.bind(this)} />
-    // return <Form/>
+     //return <Dashboard view={this.onNavigateToTransition.bind(this)} />
+     return <Form mode='DETAILED'/>
     }
     else if (this.state.view==='Form'){
       return <Form mode={this.state.option}/>

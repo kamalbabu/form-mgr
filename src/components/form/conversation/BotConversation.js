@@ -33,8 +33,8 @@ class BotConversation extends Component {
     render() {
         return (
             <div className="bot-conversation-container">
-              <img className="message-author-avatar" src={botLogo} />
-              <div className="message-box">{this.props.item.question}
+              <img className="message-author-avatar " src={botLogo} />
+              <div className="message-box bot-msg">{this.props.item.question}
                 {this.renderOptionMessage()}
               </div>
               {this.renderOption()}

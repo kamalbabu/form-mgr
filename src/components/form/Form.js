@@ -4,6 +4,19 @@ import formMockData from './../../mocks/form';
 import BotConversation from './conversation/BotConversation';
 import UserConversation from './conversation/UserConversation';
 import Preview from './preview/Preview';
+const previewCategoryData1 = [{
+  entity: 'Name',
+  value: ''
+}, {
+  entity: 'Date of Birth',
+  value: ''
+}, {
+  entity: 'Address',
+  value: ''
+},{
+  entity:'Email',
+  value:''
+}];
 
 const DETAILED_INIT_1 = 'You have selected an option for a detailed form filling option. We will not be storing any information . You can still opt for a quicker way. Let us get started';
 class Form extends Component {
@@ -13,7 +26,8 @@ class Form extends Component {
     lastIpVal: '',
     catIndex: 0,
     queryIndex: 0,
-    currentEntity:''
+    currentEntity:'',
+    formData:previewCategoryData1
   }
 
   componentDidMount() {
@@ -58,10 +72,10 @@ class Form extends Component {
       conversation: currentConversationState,
       lastIpVal: '',
       queryIndex: nextQueryIndex,
-      currentEntity:this.state.form.categories[this.state.catIndex].query[nextQueryIndex]
+      currentEntity:this.state.form.categories[this.state.catIndex].query[this.state.queryIndex]['entity']
     });
   }
-
+  
   intiateBotResponse() {
     let currentConversationState = this.state.conversation;
     let initialQuery = this.state.form.categories[this.state.catIndex].query[this.state.queryIndex];
@@ -70,7 +84,8 @@ class Form extends Component {
     currentConversationState.push(botConversationElem);
     this.setState({
       conversation: currentConversationState,
-      queryIndex: nextQueryIndex
+      queryIndex: nextQueryIndex,
+      currentEntity:this.state.form.categories[this.state.catIndex].query[this.state.queryIndex]['entity']
     });
   }
   renderConversation() {
@@ -85,10 +100,6 @@ class Form extends Component {
     return (<BotConversation key={uniqueKey} onOption={this.handleBotchoice.bind(this)} item={conversation}></BotConversation>)
   }
 
-  setInput(){
-
-  }
-
   handleUserInput(evt) {
     this.setState({
       lastIpVal: evt.target.value
@@ -100,22 +111,25 @@ class Form extends Component {
     let userConversationElem = this.prepareUserConversation(option);
     let nextQueryIndex = this.state.queryIndex + 1;
     currentConversationState.push(userConversationElem);
+    let formData = this.updateFormData(this.state.currentEntity,option);
     this.setState({
       conversation: currentConversationState,
       queryIndex: nextQueryIndex
     });
     this.intiateBotResponse()
   }
-
+  
   handleInputKeyPress(evt) {
     let currentConversationState = this.state.conversation;
     let userMsgElem;
     if (evt.key === 'Enter' && evt.target.value !== '') {
       userMsgElem = this.prepareUserConversation(evt.target.value);
+      let formData = this.updateFormData(this.state.currentEntity,evt.target.value);
       currentConversationState.push(userMsgElem);
       this.setState({
         conversation: currentConversationState,
-        lastIpVal: ''
+        lastIpVal: '',
+        formData:formData
       });
       this.intiateBotResponse();
     }
@@ -123,12 +137,25 @@ class Form extends Component {
   scrollToBottom = () => {
     this.messagesEnd.scrollTop =  this.messagesEnd.scrollHeight;
   }
+
+  updateFormData(entity,value){
+    console.log(entity);
+    let formData = this.state.formData;
+
+    for(let index in formData){
+      if(formData[index]["entity"]===entity){
+        formData[index]["value"] = value;
+      }
+    }
+    return formData;
+  }
+
   render() {
     return (
       <div className="form-container">
         <div className="content-area">
           <div className="form-preview-area">
-              <Preview/>
+              <Preview data={this.state.formData}/>
             </div>
           <div className="conversation-area">
             <div className="conversation-content" id="convelem"
