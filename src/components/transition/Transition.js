@@ -34,12 +34,7 @@ class Transition extends Component {
         <div className="transition-details">
             <div className="transition-title">Please wait while we get your form ready...</div>    
             <div className="transition-progress">
-                <LinearProgress  variant="determinate" value={this.state.completed} 
-                 styles={{
-                  bar: {
-                    backgroundColor: 'purple',
-                  },
-               }}/>
+                <LinearProgress color='primary' variant="determinate" value={this.state.completed} />
             </div>            
         </div>       
             

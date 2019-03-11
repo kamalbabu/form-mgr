@@ -3,30 +3,34 @@ let formData = {
         name: 'Personal Details',
         query:[{
             entity:'Name',
-            question:'Provide full Name',
-            options:[
-                'John Smith.'
-            ]
+            question:'We would like to have your full Name',
+            options:{}
         },
         {
-            entity:'Date of Birth',
-            question:'Date of birth ?',
-            options:[
-                ''
-            ]
+            entity:'DateofBirth',
+            question:'Please provide date of birth',
+            options:{}
         },
         {
             entity:'Address',
-            question:'Where do you live?',
-            options:[
-                '445 Mount Eden Road, Mount Eden, Auckland.'
-            ]
-        },{
-            entity:'Address',
-            question:'Where do you live?',
-            options:[
-                '445 Mount Eden Road,<br/> Mount Eden, Auckland.'
-            ]
+            question:'Please provide address.',
+            options:{
+                title:'Our system has found following address. Do you want to use?',
+                choice:[
+                    '445 Mount Eden Road, Mount Eden, Auckland.',
+                    '21 Greens Road RD 2 Ruawai 0592'
+                ]
+            }
+        },
+        {
+            entity:'Email',
+            question:'Which emailID would you like to use',
+            options:{}
+        },
+        {
+            entity:'ContactPhone',
+            question:'We would need your contact number',
+            options:{}
         }]
     }]
 }

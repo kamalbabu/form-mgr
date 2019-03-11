@@ -1,57 +1,76 @@
 import React, { Component } from 'react';
 import './Form.css';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Tab from '@material-ui/core/Tab';
-import botLogo from './logo/botlogo.png'
-import userImg from './logo/userimage.jpg';
 import formMockData from './../../mocks/form';
+import BotConversation from './conversation/BotConversation';
+import UserConversation from './conversation/UserConversation';
+import Preview from './preview/Preview';
 
-
-function Category(props) {
-  return (
-    <div className="category-container" style={{ width: props.width }} >
-      <Tab label={props.item.title} style={{ width: props.width }} />
-      <LinearProgress className="progress-elem" variant="determinate" value={props.item.progress} />
-    </div>
-  );
-}
-
+const DETAILED_INIT_1 = 'You have selected an option for a detailed form filling option. We will not be storing any information . You can still opt for a quicker way. Let us get started';
 class Form extends Component {
   state = {
     form: formMockData,
     conversation: [],
     lastIpVal: '',
-    catIndex :0,
-    queryIndex:0
+    catIndex: 0,
+    queryIndex: 0,
+    currentEntity:''
   }
 
-  componentDidMount(){
-     this.initBot();
+  componentDidMount() {
+    console.log(this.props.mode)
+    this.initializeDetailMode();
+    this.scrollToBottom();
+  }
+  
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
-  initBot(){
+  checkMode(){
+    if(this.props.mode==='QUICK'){
+
+    }if(this.props.mode==='DETAIL'){
+
+    }
+  }
+  initializeQuickMode(){
+
+  }
+  initializeDetailMode() {
+    
     let currentConversationState = this.state.conversation;
+
+    let welcome1={
+      entity:'Welcome',
+      question:DETAILED_INIT_1,
+      options:{}
+    }
+
+    let detailedWelcome1 = this.prepareBotConversation(welcome1);
+     
+    currentConversationState.push(detailedWelcome1);
     let initialQuery = this.state.form.categories[this.state.catIndex].query[this.state.queryIndex];
     let botConversationElem = this.prepareBotConversation(initialQuery);
-    let nextQueryIndex = this.state.queryIndex +1 ;
+    let nextQueryIndex = this.state.queryIndex + 1;
 
     currentConversationState.push(botConversationElem);
     this.setState({
       conversation: currentConversationState,
       lastIpVal: '',
-      queryIndex:nextQueryIndex
+      queryIndex: nextQueryIndex,
+      currentEntity:this.state.form.categories[this.state.catIndex].query[nextQueryIndex]
     });
   }
 
-  intiateBotResponse(){
+  intiateBotResponse() {
     let currentConversationState = this.state.conversation;
     let initialQuery = this.state.form.categories[this.state.catIndex].query[this.state.queryIndex];
     let botConversationElem = this.prepareBotConversation(initialQuery);
-    let nextQueryIndex = this.state.queryIndex +1;
+    let nextQueryIndex = this.state.queryIndex + 1;
     currentConversationState.push(botConversationElem);
     this.setState({
       conversation: currentConversationState,
-      queryIndex:nextQueryIndex
+      queryIndex: nextQueryIndex
     });
   }
   renderConversation() {
@@ -63,13 +82,29 @@ class Form extends Component {
   }
   prepareBotConversation(conversation) {
     let uniqueKey = this.state.conversation.length + 1;
-    return (<BotConversation key={uniqueKey} item={conversation}></BotConversation>)
+    return (<BotConversation key={uniqueKey} onOption={this.handleBotchoice.bind(this)} item={conversation}></BotConversation>)
+  }
+
+  setInput(){
+
   }
 
   handleUserInput(evt) {
     this.setState({
       lastIpVal: evt.target.value
     });
+  }
+
+  handleBotchoice(option){
+    let currentConversationState = this.state.conversation;
+    let userConversationElem = this.prepareUserConversation(option);
+    let nextQueryIndex = this.state.queryIndex + 1;
+    currentConversationState.push(userConversationElem);
+    this.setState({
+      conversation: currentConversationState,
+      queryIndex: nextQueryIndex
+    });
+    this.intiateBotResponse()
   }
 
   handleInputKeyPress(evt) {
@@ -85,28 +120,28 @@ class Form extends Component {
       this.intiateBotResponse();
     }
   }
+  scrollToBottom = () => {
+    this.messagesEnd.scrollTop =  this.messagesEnd.scrollHeight;
+  }
   render() {
     return (
       <div className="form-container">
-        {/* <div className="category-area">
-            {this.renderCategrories()}
-        </div> */}
         <div className="content-area">
-          <div className="form-preview-area">test
+          <div className="form-preview-area">
+              <Preview/>
             </div>
           <div className="conversation-area">
-            <div className="conversation-content">
+            <div className="conversation-content" id="convelem"
+                   ref={(el) => { this.messagesEnd = el; }}>
               {this.renderConversation()}
-              {/* <BotConversation item={this.state.messages}></BotConversation>
-                   <BotConversation item={this.state.messages}></BotConversation>
-                   <UserConversation item={this.state.messages}></UserConversation>
-                   <UserConversation item={this.state.messages}></UserConversation> */}
             </div>
-            <input type="text" className="conversation-k-input" 
-                    value={this.state.lastIpVal} 
-                    onChange={this.handleUserInput.bind(this)}
-                    onKeyPress={this.handleInputKeyPress.bind(this)} />
-            <button onClick={this.handleUserInput.bind(this)}> Add</button>
+            <div className="input-elm-container">
+              <input type="text" className="conversation-k-input"
+                value={this.state.lastIpVal}
+                onChange={this.handleUserInput.bind(this)}
+                onKeyPress={this.handleInputKeyPress.bind(this)} />
+              <i className="material-icons k-icon">send</i>
+            </div>
           </div>
         </div>
       </div>
@@ -115,27 +150,3 @@ class Form extends Component {
 }
 
 export default Form;
-
-function BotConversation(props) {
-  return (
-    <div className="bot-conversation-container">
-      <img className="message-author-avatar" src={botLogo} />
-      <div className="message-box">{props.item.question}</div>
-      <div className="option-container">
-          <div className="option-elem">445 Mount Eden Road, Mount Eden, Auckland.</div>
-          <div className="option-elem">445 Mount Eden Road, Mount Eden, Auckland.</div>
-          
-      </div>
-    </div>
-  );
-}
-
-
-function UserConversation(props) {
-  return (
-    <div className="user-conversation-container">
-      <img className="message-author-avatar user-avatar" src={userImg} />
-      <div className="message-box user-message">{props.item}</div>   
-    </div>
-  );
-}

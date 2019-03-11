@@ -1,10 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Toolbar from '@material-ui/core/Toolbar';
 
 import './App.css';
 import Dashboard from './components/dashboard/Dashboard';
@@ -17,30 +11,33 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state ={
-      view:'Dashboard'
+      view:'Dashboard',
+      option:''
     }
   }
   
-  onNavigateToTransition(){
+  onNavigateToTransition(option){
+    console.log(option)
     this.setState({
-      view:'Transition'
+      view:'Transition',
+      option:option
     })
   }
 
   onNavigateToForm(){
     console.log("hello");
     this.setState({
-      view:'Form'
+      view:'Form',
     })
   }
 
   displayView(){
     if(this.state.view==='Dashboard'){
      return <Dashboard view={this.onNavigateToTransition.bind(this)} />
-     //return <Form/>
+    // return <Form/>
     }
     else if (this.state.view==='Form'){
-      return <Form/>
+      return <Form mode={this.state.option}/>
     }
     else if(this.state.view==='Transition'){
       return <Transition view={this.onNavigateToForm.bind(this)}/>
