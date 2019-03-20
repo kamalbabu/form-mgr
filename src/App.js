@@ -1,55 +1,58 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import Dashboard from './components/dashboard/Dashboard';
-import Form from './components/form/Form';
-import Transition from './components/transition/Transition';
+import Navbar from './components/navbar/Navbar';
+// import Dashboard from './components/dashboard/Dashboard';
+// import Form from './components/form/Form';
+// import Transition from './components/transition/Transition';
 
 
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state ={
-      view:'Dashboard',
-      option:''
-    }
-  }
-  
-  onNavigateToTransition(option){
-    this.setState({
-      view:'Transition',
-      option:option
-    })
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     view: 'Dashboard',
+  //     option: ''
+  //   }
+  // }
 
-  onNavigateToForm(){
-    console.log("hello");
-    this.setState({
-      view:'Form',
-    })
-  }
+  // onNavigateToTransition(option) {
+  //   this.setState({
+  //     view: 'Transition',
+  //     option: option
+  //   })
+  // }
 
-  displayView(){
-    if(this.state.view==='Dashboard'){
-     //return <Dashboard view={this.onNavigateToTransition.bind(this)} />
-     return <Form mode='DETAILED'/>
-    }
-    else if (this.state.view==='Form'){
-      return <Form mode={this.state.option}/>
-    }
-    else if(this.state.view==='Transition'){
-      return <Transition view={this.onNavigateToForm.bind(this)}/>
-    }    
-  }
+  // onNavigateToForm() {
+  //   console.log("hello");
+  //   this.setState({
+  //     view: 'Form',
+  //   })
+  // }
+
+  // displayView() {
+  //   if (this.state.view === 'Dashboard') {
+  //     //return <Dashboard view={this.onNavigateToTransition.bind(this)} />
+  //     return <Form mode='DETAILED' />
+  //   }
+  //   else if (this.state.view === 'Form') {
+  //     return <Form mode={this.state.option} />
+  //   }
+  //   else if (this.state.view === 'Transition') {
+  //     return <Transition view={this.onNavigateToForm.bind(this)} />
+  //   }
+  // }
 
   render() {
-    return (      
-        <div>         
-          <div className="view-container">
+    return (
+      <div className="app-container">
+        {/* <div className="view-container">
             {this.displayView()}
-          </div>
-        </div>      
+          </div> */}
+        <Navbar />
+
+      </div>
     );
   }
 }
